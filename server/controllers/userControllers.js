@@ -224,7 +224,7 @@ const editUser = async (req, res, next) => {
         // make sure new email doesn't already exists
         const emailExist = await User.findOne({email});
         // we want to update other details with/without changing the email
-        if(emailExist && (emailExist._id == req.user.id)){
+        if(emailExist && (emailExist._id != req.user.id)){
             return next(new HttpError("Email already exists", 422))
         }
         // compare current password to database password
